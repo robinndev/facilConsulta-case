@@ -1,0 +1,42 @@
+@import '@/global/colors.scss';
+
+.b-progress {
+  color: red;
+  background-color: red;
+}
+
+.teste {
+  color: red;
+  background-color: red;
+}
+
+.progress-bar,
+.bg-success {
+  background-color: red !important;
+}
+
+
+.progress-number {
+  width: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .progress-bar,
+  .bg-success {
+    background-color: $color-primary !important;
+  }
+
+  .progress {
+    width: 24rem;
+  }
+
+  .progress100 {
+    background-color: $color-primary;
+  }
+
+  .number-bar {
+    color: $color-primary;
+    margin-top: 0.5rem;
+  }
+}

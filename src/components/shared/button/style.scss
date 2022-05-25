@@ -1,0 +1,29 @@
+@import "@/global/colors.scss";
+
+.button {
+    width: 100vw;
+}
+
+.primary {
+    background-color: $color-primary;
+    border: 0px;
+    color: white;
+}
+.primary:hover {
+    background-color: #7362BF;
+}
+
+.secondary {
+    background-color: $color-cta0;
+    border: 0px;
+    color: $secondary7;
+}
+
+.secondary:hover {
+   background-color: $color-cta1;
+}
+
+.btn {
+    width: 31.1rem;
+    border-radius: 12px;
+  }

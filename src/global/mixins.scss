@@ -1,6 +1,7 @@
 @mixin whitebox_desktop {
     width: 60%;
-    height: 80%;
+    height: auto;
+    padding-bottom: 4rem;
     background-color: white;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
