@@ -1,0 +1,23 @@
+@import '@/global/mixins.scss';
+
+.pageone {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .pageone__whitebox {
+    @include whitebox_desktop;
+  }
+}
+
+@media screen and (max-width : 915px) {
+  .pageone {
+    align-items: flex-end;
+
+    .pageone__whitebox {
+      @include whitebox_mobile;
+    }
+  }
+}
