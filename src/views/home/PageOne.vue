@@ -9,20 +9,34 @@
         <form action="">
           <label for="fullname">
             Nome completo*
-            <input class="pageone__name" id="fullname" type="text" />
+            <input
+              v-model="aboutProfessionalData.name"
+              class="pageone__name"
+              id="fullname"
+              type="text"
+            />
           </label>
           <label for="cpf">
             CPF*
-            <input class="pageone__cpf" id="cpf" type="text" />
+            <input v-model="aboutProfessionalData.cpf" class="pageone__cpf" id="cpf" type="text" />
           </label>
           <label for="phone">
             Número de celular*
-            <input class="pageone__phone" id="phone" type="text" />
+            <input
+              v-model="aboutProfessionalData.phone"
+              class="pageone__phone"
+              id="phone"
+              type="text"
+            />
           </label>
           <div class="pageone__dropdown">
             <label class="pageone__drop" for="states">
               Estado*
-              <select name="" id="states"></select>
+              <select v-model="aboutProfessionalData.state" name="" id="states">
+                <option v-for="(state, index) in states" v-bind:key="index" v-bind:value="state.id">
+                  {{ state.nome }}
+                </option>
+              </select>
             </label>
             <label class="pageone__drop" for="states">
               Cidade*
@@ -36,11 +50,7 @@
       </div>
       <div class="pageone__next">
         <LoadingBar number="1 de 2" class="pageone__loadingbar" :percentage="50" />
-        <ButtonNext
-          styles="primary"
-          class="pageone__button"
-          title="PRÓXIMO"
-        />
+        <ButtonNext @click="test1" styles="primary" class="pageone__button" title="PRÓXIMO" />
       </div>
     </div>
   </div>
@@ -53,13 +63,49 @@
 <script>
 import LoadingBar from '@/components/shared/loading-bar/LoadingBar.vue';
 import ButtonNext from '@/components/shared/button/ButtonNext.vue';
-// @ is an alias to /src
+import axios from 'axios';
 
 export default {
   name: 'PageOne',
+  data() {
+    return {
+      aboutProfessionalData: {
+        name: this.$store.aboutProfessionalData,
+        cpf: this.$store.cpf,
+        phone: this.$store.phone,
+        state: this.$store.state,
+        city: this.$store.city,
+      },
+      states: [],
+    };
+  },
   components: {
     LoadingBar,
     ButtonNext,
+  },
+  methods: {
+    clickTeste() {
+      console.log(this.aboutProfessionalData.state);
+    },
+    test1() {
+      this.$store.commit('SET_ABOUTPROFESSIONAL', this.aboutProfessionalData);
+      console.log(this.aboutProfessionalData.state);
+    },
+    test() {
+      axios
+        .get('https://api-teste-front-end-fc.herokuapp.com/estados')
+        .then((res) => {
+          this.states = res.data;
+          console.log(this.states);
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  mounted() {
+    this.test();
   },
 };
 </script>
