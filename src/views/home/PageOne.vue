@@ -33,14 +33,28 @@
             <label class="pageone__drop" for="states">
               Estado*
               <select v-model="aboutProfessionalData.state" name="" id="states">
-                <option v-for="(state, index) in states" v-bind:key="index" v-bind:value="state.id">
+                <option
+                  @click="clickTeste"
+                  v-for="(state, index) in states"
+                  v-bind:key="index"
+                  v-bind:value="state.id"
+                >
                   {{ state.nome }}
                 </option>
               </select>
             </label>
             <label class="pageone__drop" for="states">
               Cidade*
-              <select name="" id="states"></select>
+              <select v-model="aboutProfessionalData.city" name="" id="statcase_facil-consultaes">
+                <option
+                  selected="clickTeste"
+                  v-for="(city, index) in citys"
+                  :key="index"
+                  v-bind:value="city.id"
+                >
+                  {{ city.nome }}
+                </option>
+              </select>
             </label>
           </div>
         </form>
@@ -50,7 +64,7 @@
       </div>
       <div class="pageone__next">
         <LoadingBar number="1 de 2" class="pageone__loadingbar" :percentage="50" />
-        <ButtonNext @click="test1" styles="primary" class="pageone__button" title="PRÓXIMO" />
+        <ButtonNext @click="clickTeste" styles="primary" class="pageone__button" title="PRÓXIMO" />
       </div>
     </div>
   </div>
@@ -77,6 +91,8 @@ export default {
         city: this.$store.city,
       },
       states: [],
+      citys: [],
+      teste1: '',
     };
   },
   components: {
@@ -85,27 +101,42 @@ export default {
   },
   methods: {
     clickTeste() {
-      console.log(this.aboutProfessionalData.state);
+      console.log('Clicou');
+      // console.log(this.aboutProfessionalData.state);
+      // console.log(this.states);
     },
-    test1() {
+    setProfissional() {
       this.$store.commit('SET_ABOUTPROFESSIONAL', this.aboutProfessionalData);
-      console.log(this.aboutProfessionalData.state);
     },
-    test() {
+    requestForStates() {
       axios
         .get('https://api-teste-front-end-fc.herokuapp.com/estados')
         .then((res) => {
           this.states = res.data;
-          console.log(this.states);
-          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    requestForCity() {
+      axios
+        .get(
+          `https://api-teste-front-end-fc.herokuapp.com/cidades?estadoId=${this.aboutProfessionalData.state}`,
+        )
+        .then((res) => {
+          this.citys = res.data;
         })
         .catch((err) => {
           console.log(err);
         });
     },
   },
+  watch: {
+    'aboutProfessionalData.state': 'requestForCity',
+  },
   mounted() {
-    this.test();
+    this.requestForStates();
+    this.requestForCity();
   },
 };
 </script>
