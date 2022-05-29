@@ -15,6 +15,7 @@
               id="fullname"
               type="text"
             />
+            <!-- <h1 v-if="inputErrorFunction">ERROR</h1> -->
           </label>
           <label for="cpf">
             CPF*
@@ -84,15 +85,16 @@ export default {
   data() {
     return {
       aboutProfessionalData: {
-        name: this.$store.aboutProfessionalData,
-        cpf: this.$store.cpf,
-        phone: this.$store.phone,
-        state: this.$store.state,
-        city: this.$store.city,
+        name: this.$store.state.aboutProfessionalData.name,
+        cpf: this.$store.state.aboutProfessionalData.cpf,
+        phone: this.$store.state.aboutProfessionalData.phone,
+        state: this.$store.state.aboutProfessionalData.state,
+        city: this.$store.state.aboutProfessionalData.city,
       },
       states: [],
       citys: [],
       teste1: '',
+      inputError: false,
     };
   },
   components: {
@@ -101,13 +103,24 @@ export default {
   },
   methods: {
     clickTeste() {
+      console.log(String(this.aboutProfessionalData.name).length);
+      console.log(this.aboutProfessionalData.name);
       console.log('Clicou');
+      this.setProfissional();
       // console.log(this.aboutProfessionalData.state);
       // console.log(this.states);
     },
     setProfissional() {
       this.$store.commit('SET_ABOUTPROFESSIONAL', this.aboutProfessionalData);
     },
+    // inputErrorFunction() {
+    //   if (
+    //     this.aboutProfessionalData.name.length >= 1
+    //     && this.aboutProfessionalData.name.length <= 3
+    //   ) {
+    //     console.log('ERROR');
+    //   }
+    // },
     requestForStates() {
       axios
         .get('https://api-teste-front-end-fc.herokuapp.com/estados')
@@ -133,6 +146,7 @@ export default {
   },
   watch: {
     'aboutProfessionalData.state': 'requestForCity',
+    // 'aboutProfessionalData.name': 'inputErrorFunction',
   },
   mounted() {
     this.requestForStates();

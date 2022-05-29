@@ -2,7 +2,13 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-    aboutProfessionalData: {},
+    aboutProfessionalData: {
+      name: '',
+      cpf: '',
+      phone: '',
+      state: '',
+      city: '',
+    },
     requestData: '',
   },
   getters: {

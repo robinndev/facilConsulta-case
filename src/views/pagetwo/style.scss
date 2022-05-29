@@ -1,0 +1,169 @@
+@import '@/global/mixins.scss';
+@import '@/global/colors.scss';
+
+.pagetwo {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .pagetwo__whitebox {
+    background-color: red;
+    @include whitebox_desktop;
+
+    .pagetwo__header {
+      padding-top: 3em;
+
+      h1 {
+        color: #483698;
+        margin-left: 6rem;
+      }
+
+      p {
+        margin-top: 1.5rem;
+        margin-left: 6rem;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
+
+    .pagetwo__main {
+      width: 100%;
+      height: 25rem;
+      display: flex;
+
+      .pagetwo__form {
+        width: 50%;
+        height: 100%;
+
+        .pagetwo__speciality {
+          margin-left: 6rem;
+          margin-right: 3rem;
+          margin-bottom: 0.2rem;
+        }
+
+        .pagetwo__select {
+          border: 1px solid $color-primary;
+          margin-left: 6rem;
+          width: 65%;
+          margin-right: 10rem;
+        }
+
+        .pagetwo__consult__prince {
+          margin-left: 6rem;
+          font-size: 1rem;
+          margin-top: 1rem;
+          margin-bottom: 0.2rem;
+        }
+
+        .pagetwo__value_div {
+          border: 1px solid $color-primary;
+          margin-left: 6rem;
+          border-radius: 5px;
+          width: 20rem;
+
+          .pagetwo__value {
+          }
+        }
+
+
+        label {
+          margin-left: 6rem;
+          display: flex;
+          flex-direction: column;
+          margin-top: 1.5rem;
+        }
+
+        .pagetwo__payments {
+          margin-left: 6rem;
+
+          p {
+            margin-top: 1rem;
+          }
+          
+
+          .pagetwo__pix {
+            margin-top: 1rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            padding-left: 2rem;
+            margin-right: 2rem;
+            box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+            background-color: $secondary1;
+            border-radius: 5px;
+          }
+        }
+
+        .pagetwo__credit {
+          margin-top: 1rem;
+          float: center;
+          position: relative;
+          height: auto;
+          padding: 0.7rem 2rem 0.7rem 2rem;
+          display: flex;
+          margin-right: 2rem;
+          box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+          background-color: $secondary1;
+          border-radius: 5px;
+          display: flex;
+          flex-direction: column;
+
+          .pagetwo__installment {
+            display: flex;
+            flex-direction: column;
+            margin-left: 3rem;
+            width: 60%;
+            height: auto;
+          }
+        }
+      }
+
+      .pagetwo__image {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 90%;
+          // CASO ESTOURE COLOQUE EM 80%
+        }
+      }
+
+    }
+    .pagetwo__next {
+      width: 100%;
+      height: auto;
+
+      .pagetwo__loadingbar {
+        margin-left: 6rem;
+      }
+
+      .pagetwo__button {
+        margin-left: 6rem;
+        margin-top: 1rem;
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+
+@media screen and (max-width : 915px) {
+  .pagetwo {
+    align-items: flex-end;
+
+    .pagetwo__whitebox {
+      @include whitebox_mobile;
+
+      .pagetwo__main {
+
+        .pagetwo__image {
+          display: none;
+        }
+      }
+    }
+  }
+}
