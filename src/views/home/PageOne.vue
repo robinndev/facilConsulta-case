@@ -65,7 +65,9 @@
       </div>
       <div class="pageone__next">
         <LoadingBar number="1 de 2" class="pageone__loadingbar" :percentage="50" />
-        <ButtonNext @click="clickTeste" styles="primary" class="pageone__button" title="PRÓXIMO" />
+        <router-link :to="{name: 'pagetwo'}"
+          ><ButtonNext @click="clickTeste" styles="primary" class="pageone__button" title="PRÓXIMO"
+        /></router-link>
       </div>
     </div>
   </div>

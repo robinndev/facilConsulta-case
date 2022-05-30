@@ -1,0 +1,86 @@
+@import '@/global/mixins.scss';
+@import '@/global/colors.scss';
+
+.pagethree {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .pagethree__whitebox {
+    background-color: red;
+    @include whitebox_desktop;
+
+    .pagethree__header {
+      padding-top: 3em;
+
+      h1 {
+        color: #483698;
+        margin-left: 6rem;
+      }
+
+      p {
+        margin-top: 1.5rem;
+        margin-left: 6rem;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
+
+    .pagethree__main {
+      width: 100%;
+      height: auto;
+      display: flex;
+
+      .pagethree__info {
+        width: 50%;
+        height: 100%;
+
+        .title__info {
+          font-weight: 600;
+          color: black;
+        }
+
+        .title__info, .info__answer {
+          margin-left: 6rem;
+        }
+      }
+
+      .pagethree__image {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+
+        img {
+          width: 90%;
+          // CASO ESTOURE COLOQUE EM 80%
+        }
+      }
+
+    }
+
+    .pagethree__next {
+      width: 100%;
+      height: auto;
+
+      .pagethree__button {
+        margin-top: 1rem;
+        margin-left: 6rem;
+        background-color: $color-primary;
+      }
+
+      .pagethree__button_edit {
+        border: none;
+        font-family: 'Comfortaa', cursive;
+        background-color: transparent;
+        color: #483698;
+        font-weight: 900;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

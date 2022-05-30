@@ -48,7 +48,9 @@
       </div>
       <div class="pagetwo__next">
         <LoadingBar number="2 de 2" class="pagetwo__loadingbar" :percentage="50" />
+        <router-link :to="{name: 'pagethree'}">
         <ButtonNext styles="primary" class="pagetwo__button" title="PRÓXIMO" />
+        </router-link>
       </div>
     </div>
   </div>
