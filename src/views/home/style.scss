@@ -33,6 +33,9 @@
       display: flex;
 
       form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         width: 50%;
         height: 100%;
 
@@ -62,10 +65,11 @@
         }
 
         label {
+          font-size: 1.1rem;
+          margin-top: 1rem;
           margin-left: 6rem;
           display: flex;
           flex-direction: column;
-          margin-top: 1.5rem;
         }
 
         .pageone__dropdown {
@@ -103,7 +107,6 @@
 
     .pageone__next {
       width: 100%;
-      height: auto;
 
       .pageone__loadingbar {
         margin-left: 6rem;
@@ -118,12 +121,100 @@
   }
 }
 
-@media screen and (max-width : 915px) {
-  .pageone {
-    align-items: flex-end;
+// @media screen and (min-height : 667px) {
+//   .pageone {
+//     .pageone__whitebox {
+//       .pageone__next {
+//         .pageone__loadingbar {
+//           background-color: red;
+//           margin-top: 5rem;
+//         }
+//       }
+//     }
+//   }
+// }
 
-    .pageone__whitebox {
-      @include whitebox_mobile;
+  @media screen and (max-width : 756px) {
+    .pageone {
+      align-items: flex-end;
+
+
+      .pageone__whitebox {
+        @include whitebox_mobile;
+
+        .pageone__header {
+          margin-top: 2rem;
+
+          h1 {
+            font-size: 3.2rem;
+            margin-left: 2rem;
+          }
+
+          p {
+            margin-left: 2rem;
+            font-size: 2rem;
+            margin-bottom: 6rem;
+          }
+        }
+
+        .pageone__main {
+
+          form {
+            width: 100%;
+
+            .pageone__name,
+            .pageone__cpf,
+            .pageone__phone {
+              height: 4rem;
+              margin-top: 0.5rem;
+            }
+
+            label {
+              font-size: 1.8rem;
+              margin-left: 2rem;
+              margin-right: 2rem;
+            }
+
+            .pageone__dropdown {
+              margin-left: 2rem;
+              margin-right: 2rem;
+
+              .pageone__drop {
+                select {
+                  height: 4rem;
+                }
+              }
+            }
+          }
+
+          .pageone__image {
+            display: none;
+          }
+        }
+
+        .pageone__next {
+          margin-top: 8rem;
+          height: 10rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .pageone__loadingbar {
+            margin: 0;
+            margin-bottom: 1rem;
+          }
+
+          .pageone__button {
+            border-radius: 5rem;
+            margin: 0;
+            margin-bottom: 2rem;
+            width: 36rem;
+            background-color: $color-primary;
+            font-size: 2rem;
+          }
+        }
+      }
+
     }
   }
-}

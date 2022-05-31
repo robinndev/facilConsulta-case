@@ -40,3 +40,17 @@
     margin-top: 0.5rem;
   }
 }
+
+@media screen and (max-width : 915px) {
+  .progress-number {
+    width: 36rem;
+    .progress {
+      height: 2rem;
+      width: 28rem;
+    }
+
+    .number-bar {
+      font-size: 2rem;
+    }
+  }
+}

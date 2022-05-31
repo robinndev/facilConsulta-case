@@ -10,11 +10,10 @@
 @mixin whitebox_mobile {
   @media screen and (max-width : 915px) {
       width: 100%;
-      height: 90%;
+      height: 90vh;
       border-top-left-radius: 5rem;
       border-top-right-radius: 5rem;
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
-      background-color: red;
   }
 }

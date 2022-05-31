@@ -1,0 +1,90 @@
+@import '@/global/mixins.scss';
+@import '@/global/colors.scss';
+
+.conclused {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .conclused__whitebox {
+    @include whitebox_desktop;
+    height: 80vh;
+
+    .concluded__header {
+      padding-top: 3rem;
+
+      h1 {
+        color: #483698;
+        margin-top: 1.5rem;
+        margin-left: 6rem;
+      }
+
+      p {
+        margin-top: 1.5rem;
+        margin-left: 6rem;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
+
+    .conclused__main {
+      width: 100%;
+      height: 60vh;
+      display: flex;
+
+
+      .concluded__text {
+        width: 50%;
+        height: auto;
+
+        p {
+          margin-left: 6rem;
+          margin-top: 4rem;
+          margin-right: 2rem;
+          color: black;
+          text-align: justify;
+        }
+      }
+
+      .concluded__image {
+        width: 50%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 90%;
+          margin-bottom: 6rem;
+          // CASO ESTOURE COLOQUE EM 80%
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width : 915px) {
+  .conclused {
+    align-items: flex-end;
+
+    .conclused__whitebox {
+      @include whitebox_mobile;
+
+      .conclused__main {
+        flex-direction: column;
+
+        .concluded__text {
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+
+          p {
+            margin-left: 2rem;
+            margin-right: 2ren;
+          }
+        }
+      }
+    }
+  }
+}
