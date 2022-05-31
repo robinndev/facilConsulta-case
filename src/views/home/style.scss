@@ -11,6 +11,7 @@
   .pageone__whitebox {
     @include whitebox_desktop;
 
+
     .pageone__header {
       padding-top: 3em;
 
@@ -122,87 +123,97 @@
 }
 
 
-  @media screen and (max-width : 756px) {
-    .pageone {
-      align-items: flex-end;
+@media screen and (max-width : 756px) {
+  .pageone {
+    align-items: flex-end;
+    overflow: hidden;
 
 
-      .pageone__whitebox {
-        @include whitebox_mobile;
+    .pageone__whitebox {
+      @include whitebox_mobile;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
 
-        .pageone__header {
-          margin-top: 2rem;
+      .pageone__header {
+        margin-top: 2rem;
 
-          h1 {
-            font-size: 3.2rem;
-            margin-left: 2rem;
-          }
-
-          p {
-            margin-left: 2rem;
-            font-size: 2rem;
-            margin-bottom: 6rem;
-          }
+        h1 {
+          font-size: 3.2rem;
+          margin-left: 2rem;
         }
 
-        .pageone__main {
-
-          form {
-            width: 100%;
-
-            .pageone__name,
-            .pageone__cpf,
-            .pageone__phone {
-              height: 4rem;
-              margin-top: 0.5rem;
-            }
-
-            label {
-              font-size: 1.8rem;
-              margin-left: 2rem;
-              margin-right: 2rem;
-            }
-
-            .pageone__dropdown {
-              margin-left: 2rem;
-              margin-right: 2rem;
-
-              .pageone__drop {
-                select {
-                  height: 4rem;
-                }
-              }
-            }
-          }
-
-          .pageone__image {
-            display: none;
-          }
-        }
-
-        .pageone__next {
-          margin-top: 8rem;
-          height: 10rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-
-          .pageone__loadingbar {
-            margin: 0;
-            margin-bottom: 1rem;
-          }
-
-          .pageone__button {
-            border-radius: 5rem;
-            margin: 0;
-            margin-bottom: 2rem;
-            width: 36rem;
-            background-color: $color-primary;
-            font-size: 2rem;
-          }
+        p {
+          margin-left: 2rem;
+          font-size: 2rem;
+          margin-top: 3rem;
+          margin-bottom: 4rem;
         }
       }
 
+      .pageone__main {
+
+        form {
+          width: 100%;
+
+          .pageone__name,
+          .pageone__cpf,
+          .pageone__phone {
+            height: 5vh;
+            margin-top: 0.5rem;
+          }
+
+          label {
+            font-size: 1.8rem;
+            margin-left: 2rem;
+            margin-right: 2rem;
+          }
+
+          .pageone__dropdown {
+            margin-left: 2rem;
+            margin-right: 2rem;
+
+            .pageone__drop {
+              select {
+                height: 4rem;
+              }
+            }
+          }
+        }
+
+        .pageone__image {
+          display: none;
+        }
+      }
+
+      .pageone__next {
+        margin-top: 5rem;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .pageone__loadingbar {
+          margin: 0;
+          margin-bottom: 1rem;
+        }
+
+        a {
+          height: 1rem;
+          margin: 0 !important;
+        }
+
+        .pageone__button {
+          border-radius: 5rem;
+          margin: 0;
+          margin-bottom: 3rem;
+          width: 36rem;
+          background-color: $color-primary;
+          font-size: 2rem;
+        }
+      }
     }
+
   }
+}
