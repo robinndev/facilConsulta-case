@@ -5,11 +5,15 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
+  .back {
+    @include back
+  }
+
   .pagetwo__whitebox {
-    background-color: red;
     @include whitebox_desktop;
 
     .pagetwo__header {
@@ -153,13 +157,17 @@
 
 @media screen and (max-width : 756px) {
   .pagetwo {
-    align-items: flex-end;
     overflow: hidden;
+    height: auto;
+
+    .back {
+      @include back-mobile;
+    }
 
     .pagetwo__whitebox {
+      margin-top: 5%;
       @include whitebox_mobile;
       display: flex;
-      background-color: red;
       flex-direction: column;
       justify-content: space-around;
 
@@ -177,7 +185,6 @@
         p {
           margin-top: 1.5rem;
           margin-left: 2rem;
-          font-size: 1.5rem;
           font-weight: 500;
           font-size: 2rem;
         }
@@ -190,6 +197,7 @@
 
           .pagetwo__consult__prince {
             margin-left: 2rem;
+            font-size: 1.5rem;
           }
 
           .pagetwo__value_div {
@@ -199,6 +207,7 @@
 
           .pagetwo__speciality {
             margin-left: 2rem;
+            font-size: 1.5rem;
           }
 
           .pagetwo__select {
@@ -212,6 +221,7 @@
   
             p {
               margin-top: 3rem;
+              font-size: 1.5rem;
             }
   
             .pagetwo__pix {
@@ -224,9 +234,11 @@
               box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
               background-color: $secondary1;
               border-radius: 5px;
+              font-size: 1.5rem;
             }
           }
           .pagetwo__credit {
+            font-size: 1.5rem;
             height: auto;
             padding: 1.5vh 2rem 1.5vh 2rem;
             display: flex;

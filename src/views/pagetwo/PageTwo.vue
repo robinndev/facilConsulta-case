@@ -1,5 +1,8 @@
 <template>
   <div class="pagetwo">
+        <router-link to="/"
+      ><img class="back" src="@/assets/back-button.png" alt=""
+    /></router-link>
     <div class="pagetwo__whitebox">
       <header class="pagetwo__header">
         <h1>Sobre o atendimento</h1>
