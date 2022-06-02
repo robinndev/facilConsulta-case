@@ -19,7 +19,13 @@
           </label>
           <label for="cpf">
             CPF*
-            <input v-model="aboutProfessionalData.cpf" class="pageone__cpf" id="cpf" type="text" />
+            <input
+              v-model="aboutProfessionalData.cpf"
+              class="pageone__cpf"
+              id="cpf"
+              type="text"
+              mask=""
+            />
           </label>
           <label for="phone">
             Número de celular*
@@ -130,17 +136,15 @@ export default {
     //     console.log('ERROR');
     //   }
     // },
-
+    regexCpf(cpf) {
+      return cpf;
+    },
     requestForCpf() {
       http
         .get('/profissionais')
         .then((res) => {
-          // const cpfs = res.data;
           this.cpfRequest = res.data;
           console.log('ENVIANDO', this.cpfRequest);
-          // console.log(cpfs.filter((c) => c.cpf === '90238490293'));
-          // this.cpfRequest = res.data;
-          // console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -154,16 +158,10 @@ export default {
       if (newArray.length !== 0) {
         el.style.border = '1px solid red';
         console.log('ERROR');
-        // console.log(newArray);
       } else {
         el.style.border = '1px solid #483698';
-        // console.log(newArray);
-        // console.log('PASSOU');
       }
     },
-    // verifyCpf() {
-    //   this.cpfFiltered();
-    // },
     requestForStates() {
       http
         .get('https://api-teste-front-end-fc.herokuapp.com/estados')
