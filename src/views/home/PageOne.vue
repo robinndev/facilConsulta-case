@@ -10,12 +10,12 @@
           <label for="fullname">
             Nome completo*
             <input
-              v-model="aboutProfessionalData.name"
+              v-model.lazy="aboutProfessionalData.name"
               class="pageone__name"
               id="fullname"
               type="text"
             />
-            <!-- <h1 v-if="inputErrorFunction">ERROR</h1> -->
+            <p class="error" v-if="fullNameError">Error message</p>
           </label>
           <label for="cpf">
             CPF*
@@ -24,8 +24,9 @@
               class="pageone__cpf"
               id="cpf"
               type="text"
-              mask=""
+              v-maska="'###.###.###-##'"
             />
+            <p v-if="cpfInputError" class="error">CPF já cadastrado</p>
           </label>
           <label for="phone">
             Número de celular*
@@ -34,6 +35,7 @@
               class="pageone__phone"
               id="phone"
               type="text"
+              v-maska="'(##) # ####-####'"
             />
           </label>
           <div class="pageone__dropdown">
@@ -44,7 +46,7 @@
                   @click="clickTeste"
                   v-for="(state, index) in states"
                   v-bind:key="index"
-                  v-bind:value="state.id"
+                  v-bind:value="[state.nome, state.id]"
                 >
                   {{ state.nome }}
                 </option>
@@ -66,14 +68,12 @@
           </div>
         </form>
         <div class="pageone__image">
-          <img src="@/assets/page-one.png" alt="" />
+          <img src="@/assets/page-one.png" alt="animação de dois médicos conversando" />;
         </div>
       </div>
       <div class="pageone__next">
         <LoadingBar number="1 de 2" class="pageone__loadingbar" :percentage="50" />
-        <router-link :to="{ name: 'pagetwo' }"
-          ><ButtonNext @click="commit" styles="primary" class="pageone__button" title="PRÓXIMO"
-        /></router-link>
+        <ButtonNext @click="commit" styles="primary" class="pageone__button" title="PRÓXIMO" />
       </div>
     </div>
   </div>
@@ -87,6 +87,7 @@
 import LoadingBar from '@/components/shared/loading-bar/LoadingBar.vue';
 import ButtonNext from '@/components/shared/button/ButtonNext.vue';
 import http from '@/services/http';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'PageOne',
@@ -99,6 +100,8 @@ export default {
         state: this.$store.state.aboutProfessionalData.state,
         city: this.$store.state.aboutProfessionalData.city,
       },
+      fullNameError: false,
+      cpfInputError: false,
       states: [],
       citys: [],
       teste1: '',
@@ -111,84 +114,106 @@ export default {
     ButtonNext,
   },
 
-  computed: {},
-
   methods: {
+    // COMMIT FOR VUEX
     commit() {
-      this.$store.commit('SET_ABOUTPROFESSIONAL', this.aboutProfessionalData);
+      if (
+        this.aboutProfessionalData.name.length > 0
+        && this.fullNameError === false
+        && this.aboutProfessionalData.phone.replace(/[^\d]+/g, '').length === 11
+        && this.cpfInputError === false
+        && this.aboutProfessionalData.state !== ''
+        && this.aboutProfessionalData.city !== ''
+        && this.aboutProfessionalData.cpf.replace(/[^\d]+/g, '').length === 11
+      ) {
+        this.$router.push({ name: 'pagetwo' });
+        this.$store.commit('SET_ABOUTPROFESSIONAL', this.aboutProfessionalData);
+      } else {
+        this.alert();
+      }
     },
-    // clickTeste() {
-    //   console.log(String(this.aboutProfessionalData.name).length);
-    //   console.log(this.aboutProfessionalData.name);
-    //   console.log('Clicou');
-    //   this.setProfissional();
-    // console.log(this.aboutProfessionalData.state);
-    // console.log(this.states);
-    // },
-    // setProfissional() {
-    //   this.$store.commit('SET_ABOUTPROFESSIONAL', this.aboutProfessionalData);
-    // },
-    // inputErrorFunction() {
-    //   if (
-    //     this.aboutProfessionalData.name.length >= 1
-    //     && this.aboutProfessionalData.name.length <= 3
-    //   ) {
-    //     console.log('ERROR');
-    //   }
-    // },
-    regexCpf(cpf) {
-      return cpf;
+
+    // INPUT VALIDATES
+    nameIsValid() {
+      const el = document.getElementById('fullname');
+      if (
+        this.aboutProfessionalData.name.length >= 3
+        && this.aboutProfessionalData.name.length <= 48
+      ) {
+        this.fullNameError = false;
+        el.style.border = '1px solid #483698';
+      } else {
+        el.style.border = '1px solid red';
+        this.fullNameError = true;
+      }
     },
+
+    // REQUEST AND FILTER CPF
     requestForCpf() {
       http
         .get('/profissionais')
         .then((res) => {
           this.cpfRequest = res.data;
-          console.log('ENVIANDO', this.cpfRequest);
         })
         .catch((err) => {
           console.log(err);
         });
     },
+
+    // FILTER FOR CPF
     cpfFiltered() {
       const el = document.getElementById('cpf');
-      const newArray = this.cpfRequest.filter(
-        (cpfs) => cpfs.cpf === this.aboutProfessionalData.cpf,
-      );
+      const cpfForFiltered = this.aboutProfessionalData.cpf.replace(/[^\d]+/g, '');
+      const newArray = this.cpfRequest.filter((cpfs) => cpfs.cpf === cpfForFiltered);
       if (newArray.length !== 0) {
         el.style.border = '1px solid red';
-        console.log('ERROR');
+        this.cpfInputError = true;
       } else {
+        this.cpfInputError = false;
         el.style.border = '1px solid #483698';
       }
     },
+
+    // REQUEST FOR STATES
     requestForStates() {
       http
         .get('https://api-teste-front-end-fc.herokuapp.com/estados')
         .then((res) => {
-          console.log(res);
           this.states = res.data;
         })
         .catch((err) => {
           console.log(err);
         });
     },
+
+    // REQUEST FOR CITY's
     requestForCity() {
       http
         .get(
-          `https://api-teste-front-end-fc.herokuapp.com/cidades?estadoId=${this.aboutProfessionalData.state}`,
+          `https://api-teste-front-end-fc.herokuapp.com/cidades?estadoId=${this.aboutProfessionalData.state[1]}`,
         )
         .then((res) => {
           this.citys = res.data;
-          console.log('TESTE', res.data);
         })
         .catch((err) => {
           console.log(err);
         });
     },
+
+    // ALERT
+
+    alert() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Tente novamente!',
+        text: 'Você esqueceu de preencher algo campo 😧',
+        footer: '<a href="https://facilconsulta.com.br/">Nos contate, caso tenha dúvidas</a>',
+      });
+    },
   },
   watch: {
     'aboutProfessionalData.state': 'requestForCity',
+    'aboutProfessionalData.name': 'nameIsValid',
     'aboutProfessionalData.cpf': 'cpfFiltered',
     // 'aboutProfessionalData.name': 'inputErrorFunction',
   },

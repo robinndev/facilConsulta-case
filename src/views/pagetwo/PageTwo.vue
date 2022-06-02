@@ -20,8 +20,14 @@
           </b-form-select>
           <p class="pagetwo__consult__prince">Informe o preço da consulta*</p>
           <b-input-group class="pagetwo__value_div" size="md" prepend="R$" variant="info">
-            <b-form-input v-model="aboutTheService.price" class="pagetwo__value"></b-form-input>
+            <b-form-input
+              v-maska="['###.##', '##.##']"
+              v-model="aboutTheService.price"
+              class="pagetwo__value"
+              id="price"
+            ></b-form-input>
           </b-input-group>
+          <p v-if="errorInputValue" class="error">Coloque um valor entre 30.00 e 350.00</p>
           <div class="pagetwo__payments">
             <p>Formas de pagamento da consulta*</p>
             <div class="pagetwo__pix">
@@ -43,6 +49,7 @@
                 value="Cartão de crédito"
                 v-model="aboutTheService.paymentFormCredit"
                 @click="clickToCredit"
+                id="credit"
                 >ﾠﾠﾠCartão de crédito</b-form-checkbox
               >
               <div v-if="credit" class="pagetwo__installment">
@@ -77,9 +84,7 @@
       </div>
       <div class="pagetwo__next">
         <LoadingBar number="2 de 2" class="pagetwo__loadingbar" :percentage="50" />
-        <router-link :to="{ name: 'pagethree' }">
-        <ButtonNext @click="commit" styles="primary" class="pagetwo__button" title="PRÓXIMO" />
-        </router-link>
+          <ButtonNext @click="commit" styles="primary" class="pagetwo__button" title="PRÓXIMO" />
       </div>
     </div>
   </div>
@@ -89,6 +94,7 @@
 import LoadingBar from '@/components/shared/loading-bar/LoadingBar.vue';
 import ButtonNext from '@/components/shared/button/ButtonNext.vue';
 import http from '@/services/http';
+import Swal from 'sweetalert2';
 
 export default {
   data() {
@@ -103,6 +109,7 @@ export default {
       credit: false,
       specialitySelected: '',
       optionSpeciality: [],
+      errorInputValue: false,
     };
   },
 
@@ -113,35 +120,57 @@ export default {
 
   methods: {
     commit() {
-      this.$store.commit('SET_ABOUTSERVICE', this.aboutTheService);
+      if (this.credit === true && this.aboutTheService.parcelsCredit === '') {
+        this.alert();
+      } else {
+        this.$store.commit('SET_ABOUTSERVICE', this.aboutTheService);
+        this.$router.push({ name: 'pagethree' });
+      }
+    },
+    alert() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Verifique os campos!',
+        text: 'Selecione uma forma de parcelamento',
+        footer: '<a href="https://facilconsulta.com.br/">Nos contate, caso tenha dúvidas</a>',
+      });
+    },
+
+    inputPriceValidate() {
+      const el = document.getElementById('price');
+      if (
+        Number(this.aboutTheService.price) >= 30.0
+        && Number(this.aboutTheService.price) <= 350.0
+      ) {
+        el.style.border = '1px solid #483698';
+        this.errorInputValue = false;
+      } else {
+        this.errorInputValue = true;
+        el.style.border = '1px solid red';
+      }
     },
     clickToCredit() {
       // const vazio = '';
-      console.log('CLICOU');
       if (this.credit === false) {
         this.credit = true;
-        console.log(true);
       } else {
         this.credit = false;
-        console.log(false);
-        // this.parcelsCredit = vazio;
-        // this.$store.commit('DELETE_CREDITPARCEL', vazio);
-        // this.parcelsCredit = '';
       }
-      // console.log(this.credit);
     },
     requestForSpeciality() {
       http
         .get('especialidades')
         .then((res) => {
           this.optionSpeciality = res.data;
-          console.log('TESTE', this.optionSpeciality);
-          console.log(res);
         })
         .catch((err) => {
           console.log(err);
         });
     },
+  },
+
+  watch: {
+    'aboutTheService.price': 'inputPriceValidate',
   },
 
   mounted() {

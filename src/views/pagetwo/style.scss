@@ -41,6 +41,12 @@
         width: 50%;
         height: auto;
 
+        .error {
+          color: red;
+          margin-left: 6rem;
+          margin-top: 0.5rem;
+        }
+
         .pagetwo__speciality {
           margin-left: 6rem;
           margin-right: 3rem;
@@ -198,6 +204,11 @@
 
         .pagetwo__form {
           width: 100%;
+
+          .error {
+            margin-left: 2rem;
+            font-size: 1.4rem;
+          }
 
           .pagetwo__consult__prince {
             margin-left: 2rem;

@@ -18,7 +18,7 @@
           <p class="info__answer">{{ this.$store.state.aboutProfessionalData.phone }}</p>
           <p class="title__info">Estado/Cidade</p>
           <p class="info__answer">
-            {{ this.$store.state.aboutProfessionalData.state }} /
+            {{ this.$store.state.aboutProfessionalData.state[0] }} /
             {{ this.$store.state.aboutProfessionalData.city }}
           </p>
           <p class="title__info">Especialidade principal</p>
@@ -69,8 +69,6 @@
 import ButtonNext from '@/components/shared/button/ButtonNext.vue';
 
 export default {
-  methods: {},
-
   components: {
     ButtonNext,
   },

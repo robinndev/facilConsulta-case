@@ -45,10 +45,10 @@
         }
 
         .error {
-          background-color: red;
+          color: red;
         }
 
-        .inputError {
+        .inputErrors {
           background-color: red;
         }
 
@@ -59,12 +59,6 @@
           height: 2rem;
           border-radius: 5px;
         }
-        
-        // .pageone__name:focus,
-        // .pageone__cpf:focus,
-        // .pageone__phone:focus {
-        //   border: #483698;
-        // }
 
         .pageone__cpf,
         .pageone__phone {
@@ -77,6 +71,10 @@
           margin-left: 6rem;
           display: flex;
           flex-direction: column;
+
+          p {
+            margin: 0;
+          }
         }
 
         .pageone__dropdown {
@@ -133,10 +131,13 @@
   .pageone {
     align-items: flex-end;
     overflow: hidden;
+    height: auto;
+    min-height: 100vh;
 
 
     .pageone__whitebox {
       @include whitebox_mobile;
+      margin-top: 5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -153,7 +154,7 @@
           margin-left: 2rem;
           font-size: 2rem;
           margin-top: 3rem;
-          margin-bottom: 4rem;
+          margin-bottom: 8rem;
         }
       }
 
@@ -170,7 +171,7 @@
           }
 
           label {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-left: 2rem;
             margin-right: 2rem;
           }
@@ -193,7 +194,7 @@
       }
 
       .pageone__next {
-        margin-top: 5rem;
+        margin-top: 10rem;
         height: 10rem;
         display: flex;
         flex-direction: column;

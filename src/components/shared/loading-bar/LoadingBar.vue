@@ -4,7 +4,7 @@
       <div
         class="progress-bar bg-success"
         role="progressbar"
-        style="width: 50%"
+        style="width: 100%"
         aria-valuenow="25"
         aria-valuemin="0"
         aria-valuemax="100"
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ['estilo', 'number'],
+  props: ['estilo', 'number', 'percentage'],
 };
 </script>
 
