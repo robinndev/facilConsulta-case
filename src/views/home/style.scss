@@ -59,6 +59,12 @@
           height: 2rem;
           border-radius: 5px;
         }
+        
+        // .pageone__name:focus,
+        // .pageone__cpf:focus,
+        // .pageone__phone:focus {
+        //   border: #483698;
+        // }
 
         .pageone__cpf,
         .pageone__phone {
@@ -200,7 +206,7 @@
         }
 
         a {
-          height: 1rem;
+          height: auto;
           margin: 0 !important;
         }
 

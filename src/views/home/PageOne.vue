@@ -51,7 +51,7 @@
                   selected="clickTeste"
                   v-for="(city, index) in citys"
                   :key="index"
-                  v-bind:value="city.id"
+                  v-bind:value="city.nome"
                 >
                   {{ city.nome }}
                 </option>
@@ -65,8 +65,8 @@
       </div>
       <div class="pageone__next">
         <LoadingBar number="1 de 2" class="pageone__loadingbar" :percentage="50" />
-        <router-link :to="{name: 'pagetwo'}"
-          ><ButtonNext @click="clickTeste" styles="primary" class="pageone__button" title="PRÓXIMO"
+        <router-link :to="{ name: 'pagetwo' }"
+          ><ButtonNext @click="commit" styles="primary" class="pageone__button" title="PRÓXIMO"
         /></router-link>
       </div>
     </div>
@@ -80,7 +80,7 @@
 <script>
 import LoadingBar from '@/components/shared/loading-bar/LoadingBar.vue';
 import ButtonNext from '@/components/shared/button/ButtonNext.vue';
-import axios from 'axios';
+import http from '@/services/http';
 
 export default {
   name: 'PageOne',
@@ -96,6 +96,7 @@ export default {
       states: [],
       citys: [],
       teste1: '',
+      cpfRequest: '',
       inputError: false,
     };
   },
@@ -103,18 +104,24 @@ export default {
     LoadingBar,
     ButtonNext,
   },
+
+  computed: {},
+
   methods: {
-    clickTeste() {
-      console.log(String(this.aboutProfessionalData.name).length);
-      console.log(this.aboutProfessionalData.name);
-      console.log('Clicou');
-      this.setProfissional();
-      // console.log(this.aboutProfessionalData.state);
-      // console.log(this.states);
-    },
-    setProfissional() {
+    commit() {
       this.$store.commit('SET_ABOUTPROFESSIONAL', this.aboutProfessionalData);
     },
+    // clickTeste() {
+    //   console.log(String(this.aboutProfessionalData.name).length);
+    //   console.log(this.aboutProfessionalData.name);
+    //   console.log('Clicou');
+    //   this.setProfissional();
+    // console.log(this.aboutProfessionalData.state);
+    // console.log(this.states);
+    // },
+    // setProfissional() {
+    //   this.$store.commit('SET_ABOUTPROFESSIONAL', this.aboutProfessionalData);
+    // },
     // inputErrorFunction() {
     //   if (
     //     this.aboutProfessionalData.name.length >= 1
@@ -123,10 +130,45 @@ export default {
     //     console.log('ERROR');
     //   }
     // },
+
+    requestForCpf() {
+      http
+        .get('/profissionais')
+        .then((res) => {
+          // const cpfs = res.data;
+          this.cpfRequest = res.data;
+          console.log('ENVIANDO', this.cpfRequest);
+          // console.log(cpfs.filter((c) => c.cpf === '90238490293'));
+          // this.cpfRequest = res.data;
+          // console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    cpfFiltered() {
+      const el = document.getElementById('cpf');
+      const newArray = this.cpfRequest.filter(
+        (cpfs) => cpfs.cpf === this.aboutProfessionalData.cpf,
+      );
+      if (newArray.length !== 0) {
+        el.style.border = '1px solid red';
+        console.log('ERROR');
+        // console.log(newArray);
+      } else {
+        el.style.border = '1px solid #483698';
+        // console.log(newArray);
+        // console.log('PASSOU');
+      }
+    },
+    // verifyCpf() {
+    //   this.cpfFiltered();
+    // },
     requestForStates() {
-      axios
+      http
         .get('https://api-teste-front-end-fc.herokuapp.com/estados')
         .then((res) => {
+          console.log(res);
           this.states = res.data;
         })
         .catch((err) => {
@@ -134,12 +176,13 @@ export default {
         });
     },
     requestForCity() {
-      axios
+      http
         .get(
           `https://api-teste-front-end-fc.herokuapp.com/cidades?estadoId=${this.aboutProfessionalData.state}`,
         )
         .then((res) => {
           this.citys = res.data;
+          console.log('TESTE', res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -148,11 +191,13 @@ export default {
   },
   watch: {
     'aboutProfessionalData.state': 'requestForCity',
+    'aboutProfessionalData.cpf': 'cpfFiltered',
     // 'aboutProfessionalData.name': 'inputErrorFunction',
   },
   mounted() {
     this.requestForStates();
     this.requestForCity();
+    this.requestForCpf();
   },
 };
 </script>

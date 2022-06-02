@@ -12,6 +12,10 @@ html,
   background: #FFE766;
 }
 
+*:focus {
+    outline: none;
+}
+
 h1,
 h2,
 h3,
