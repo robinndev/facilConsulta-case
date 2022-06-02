@@ -8,31 +8,37 @@
       <div class="conclused__main">
         <div class="concluded__text">
           <p>
-            Obrigado por se inscrever em nossa plataforma, em nome de toda a equipe da fácil
-            consulta, te desejamos boas vinda! Lorem ipsum, dolor sit amet consectetur adipisicing
-            elit. Distinctio mollitia minus voluptatibus hic culpa modi, at, ut suscipit facilis
-            recusandae veritatis consequatur magnam natus amet illo? Reprehenderit aspernatur
-            architecto earum? consulta, te desejamos boas vinda! Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Distinctio mollitia minus voluptatibus hic culpa modi, at,
-            ut suscipit facilis recusandae veritatis consequatur magnam natus amet illo?
-            Reprehenderit aspernatur architecto earum? consulta, te desejamos boas vinda! Lorem
-            ipsum, dolor sit amet consectetur adipisicing elit. Distinctio mollitia minus
-            voluptatibus hic culpa modi, at, ut suscipit facilis recusandae veritatis consequatur
-            magnam natus amet illo? Reprehenderit aspernatur architecto earum?
+            Obrigado <strong>{{ this.$store.state.aboutProfessionalData.name }}</strong> por se
+            inscrever em nossa plataforma, em nome de toda a equipe da fácil consulta, te desejamos
+            boas vinda!
+            <br />
+            <br />
+            Adoraremos ter você na nossa equipe, esperamos que dê tudo certo no setor de
+            <strong>{{ this.$store.state.aboutTheService.speciality }}</strong> caso necessite,
+            poderá falar conosco no botão <strong>"Dúvidas"</strong>
+            <br />
+            <br />
+            Para demais informações entre em contato conosco em
+            <a target="blank" href="https://www.linkedin.com/in/robinndev/">AJUDA</a>
           </p>
         </div>
         <div class="concluded__image">
           <img src="@/assets/conclused.png" alt="" />
         </div>
       </div>
+      <ButtonNext styles="primary" class="conclused__button" title="DÚVIDAS" />
     </div>
   </div>
 </template>
 
 <script>
+import ButtonNext from '@/components/shared/button/ButtonNext.vue';
 import Swal from 'sweetalert2';
 
 export default {
+  components: {
+    ButtonNext,
+  },
   methods: {
     alert() {
       Swal.fire({

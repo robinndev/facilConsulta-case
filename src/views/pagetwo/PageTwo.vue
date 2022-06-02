@@ -83,8 +83,12 @@
         </div>
       </div>
       <div class="pagetwo__next">
-        <LoadingBar number="2 de 2" class="pagetwo__loadingbar" :percentage="50" />
-          <ButtonNext @click="commit" styles="primary" class="pagetwo__button" title="PRÓXIMO" />
+        <LoadingBar
+          number="2 de 2"
+          class="pagetwo__loadingbar"
+          estilo="progress100"
+        />
+        <ButtonNext @click="commit" styles="primary" class="pagetwo__button" title="PRÓXIMO" />
       </div>
     </div>
   </div>
