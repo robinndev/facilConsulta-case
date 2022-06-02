@@ -1,0 +1,143 @@
+@import '@/global/mixins.scss';
+@import '@/global/colors.scss';
+
+.conclused {
+  width: 100vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  height: auto;
+  overflow-y: hidden;
+
+  .conclused__whitebox {
+    @include whitebox_desktop;
+    height: auto;
+    display: flex;
+    overflow-y: hidden;
+    flex-direction: column;
+
+    a {
+      color: #483698;
+    }
+
+    .concluded__header {
+      padding-top: 3rem;
+
+      h1 {
+        color: #483698;
+        margin-top: 1.5rem;
+        margin-left: 6rem;
+      }
+
+      p {
+        margin-top: 1.5rem;
+        margin-left: 6rem;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
+
+    .conclused__main {
+      margin-top: 3.5rem;
+      width: 100%;
+      height: auto;
+      display: flex;
+
+
+      .concluded__text {
+        width: 50%;
+        height: auto;
+
+        p {
+          margin-left: 6rem;
+          margin-right: 2rem;
+          color: black;
+          font-size: 1.2rem;
+          text-align: justify;
+        }
+      }
+
+      .concluded__image {
+        width: 50%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 90%;
+          // CASO ESTOURE COLOQUE EM 80%
+        }
+      }
+    }
+
+    .conclused__button {
+      width: 28rem;
+      margin-left: 6rem;
+      margin-top: 2rem;
+      background-color: #483698;
+      font-weight: 500;
+      font-size: 1rem;
+      font-family: 'Comfortaa', cursive;
+    }
+  }
+}
+
+@media screen and (max-width : 756px) {
+  .conclused {
+    align-items: flex-end;
+
+    .conclused__whitebox {
+      @include whitebox_mobile;
+      height: auto;
+
+      .concluded__header {
+        padding-top: 3rem;
+  
+        h1 {
+          color: #483698;
+          margin-top: 2rem;
+          font-size: 3rem;
+          margin-left: 2rem;
+        }
+  
+        p {
+          margin-top: 1.5rem;
+          margin-left: 2rem;
+          font-size: 1.8rem;
+          font-weight: 500;
+        }
+      }
+
+      .conclused__main {
+        flex-direction: column;
+
+        .concluded__text {
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+
+          p {
+            font-size: 1.5rem;
+            margin-left: 2rem;
+            margin-right: 2ren;
+          }
+        }
+
+        .concluded__image {
+          display: none;
+        }
+      }
+
+    .conclused__button {
+      font-size: 1.5rem;
+      border-radius: 50px;
+      width: 30rem;
+      margin-left: 12%;
+      margin-top: 5rem;
+    }
+    }
+  }
+}

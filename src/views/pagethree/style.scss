@@ -1,0 +1,190 @@
+@import '@/global/mixins.scss';
+@import '@/global/colors.scss';
+
+.pagethree {
+  width: 100vw;
+  min-height: 100vh;
+  height: auto;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .back {
+    @include back
+  }
+
+  .pagethree__whitebox {
+    @include whitebox_desktop;
+
+    .pagethree__header {
+      padding-top: 3em;
+
+      h1 {
+        color: #483698;
+        margin-left: 6rem;
+      }
+
+      p {
+        margin-top: 1.3rem;
+        margin-left: 6rem;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
+
+    .pagethree__main {
+      height: auto;
+      display: flex;
+
+      .pagethree__info {
+        width: 50%;
+        height: 100%;
+
+        .title__info {
+          font-weight: 600;
+          color: black;
+        }
+
+        .title__info,
+        .info__answer {
+          margin-left: 6rem;
+        }
+      }
+
+      .pagethree__image {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+
+        img {
+          width: 90%;
+          // CASO ESTOURE COLOQUE EM 80%
+        }
+      }
+    }
+
+    .pagethree__next {
+      width: 100%;
+      height: auto;
+
+      .pagethree__button {
+        margin-top: 1rem;
+        margin-left: 6rem;
+        background-color: $color-primary;
+      }
+
+      .pagethree__button_edit {
+        border: none;
+        font-family: 'Comfortaa', cursive;
+        background-color: transparent;
+        color: #483698;
+        font-weight: 900;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width : 756px) {
+  .pagethree {
+    align-items: flex-end;
+    overflow: hidden;
+    height: auto;
+    min-height: 100vh;
+    justify-content: space-between;
+
+    .back {
+      @include back-mobile
+    }
+
+    .pagethree__whitebox {
+      @include whitebox_mobile;
+
+      .pagethree__header {
+        padding-top: 5em;
+
+        h1 {
+          color: #483698;
+          margin-left: 2rem;
+          font-size: 3rem;
+        }
+
+        p {
+          margin-left: 2rem;
+          font-size: 2rem;
+          margin-bottom: 4rem;
+        }
+      }
+
+      .pagethree__main {
+        height: auto;
+        display: flex;
+
+        .pagethree__info {
+          width: 100%;
+
+          .title__info {
+            font-size: 1.5em;
+            margin-left: 2rem;
+          }
+
+          // .title__info,
+          .info__answer {
+            font-size: 1.4em;
+            margin-left: 2rem;
+          }
+        }
+
+        .pagethree__image {
+          display: none;
+        }
+      }
+
+      .pagethree__next {
+        margin-top: 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+
+        // a {
+        //   height: auto;
+        //   margin: 0 !important;
+        //   display: flex;
+        //   align-items: center;
+        //   justify-content: center;
+        //   flex-direction: column;
+        //   text-decoration: none;
+        // }
+
+
+        .pagethree__button {
+          margin-top: 1rem;
+          border-radius: 5rem;
+          margin-left: 0;
+          border: none;
+          font-size: 2rem;
+          width: 36rem;
+          background-color: $color-cta0;
+          color: black;
+          font-weight: 500;
+        }
+  
+        .pagethree__button_edit {
+          font-family: 'Comfortaa', cursive;
+          background-color: transparent;
+          color: #483698;
+          font-weight: 900;
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+}
