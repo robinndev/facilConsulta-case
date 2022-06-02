@@ -33,10 +33,13 @@ $ yarn dev
 
 ## Tools employed
 
-* [Vue.js](https://reactjs.org/)
+* [Vue.js 3](https://vuejs.org/)
 * [Sass](https://sass-lang.com/)
 * [Bootstrap](https://axios-http.com/)      
-* [Vuex](https://pokeapi.co/docs/v2)      
+* [Vuex]([https://pokeapi.co/docs/v2](https://vuex.vuejs.org/)
+* [SweetAlert](https://sweetalert2.github.io/)
+* [Vmask]([https://pokeapi.co/docs/v2](https://www.npmjs.com/package/v-mask)
+      
 
 ---
 
