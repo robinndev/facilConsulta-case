@@ -36,6 +36,18 @@
         width: 50%;
         height: 100%;
 
+        .input-errors {
+          background-color: red;
+        }
+
+        .error {
+          background-color: red;
+        }
+
+        .inputError {
+          background-color: red;
+        }
+
         .pageone__name,
         .pageone__cpf,
         .pageone__phone {

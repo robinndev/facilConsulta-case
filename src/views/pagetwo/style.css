@@ -1,0 +1,6 @@
+@import '@/global/colors.scss';
+
+.input-group-text {
+  color: white;
+  background-color: #483698;
+}
